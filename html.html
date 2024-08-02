@@ -1,0 +1,825 @@
+<body>
+
+        <script>
+        // Hàm kiểm tra khi phần tử vào khung nhìn
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - 50) { // Kiểm tra phần tử có trong khung nhìn không
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // Lắng nghe sự kiện cuộn
+        window.addEventListener('scroll', handleScroll);
+
+        // Kiểm tra khi trang được tải
+        window.addEventListener('load', handleScroll);
+    </script>
+    </div>
+
+</body>
+    <script>
+    <!-- Thêm phần tử âm thanh -->
+    	<source src="46.mp3" type="audio/mp3">
+    <audio id="welcome-sound" src="46.mp3" preload="auto"></audio>
+
+    <script>
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('welcome-sound');
+            if (audio) {
+                audio.play().catch(function(error) {
+                    console.log('Âm thanh không thể phát tự động. ' + error);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #F8F8FF;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            background: # #F8F8FF;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .avatar {
+            width: 80px; /* Kích thước khung chứa avatar */
+            height: 80px; /* Kích thước khung chứa avatar */
+            overflow: hidden; /* Ẩn phần ảnh thừa */
+            border-radius: 50%; /* Làm tròn avatar */
+            margin-right: 15px; /* Khoảng cách giữa avatar và tên */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Giữ tỷ lệ khung hình và phủ kín khung chứa */
+        }
+
+        .name h1 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <div class="avatar">
+            <img src="jpg.jpg" alt="Avatar">
+        </div>
+        <div class="name">
+            <h1></h1>
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Màu nền của trang */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Ẩn thanh cuộn */
+            position: relative;
+        }
+
+        .preloader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9); /* Nền nhẹ nhàng cho preloader */
+            width: 100%;
+            height: 100%;
+            z-index: 9999; /* Đảm bảo preloader nằm trên tất cả nội dung khác */
+        }
+
+        .preloader .spinner {
+            border: 8px solid #f3f3f3; /* Màu nền của spinner */
+            border-top: 8px solid #3498db; /* Màu của phần quay */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column; /* Sắp xếp theo chiều dọc */
+            justify-content: center;
+            align-items: center;
+            width: 80%; /* Chiều rộng của container */
+            max-width: 500px; /* Chiều rộng tối đa của container */
+            gap: 20px; /* Khoảng cách giữa các ứng dụng */
+            opacity: 0; /* Ẩn nội dung cho đến khi trang tải xong */
+            transition: opacity 1s ease-in-out;
+        }
+
+        .app {
+            width: 100%; /* Đảm bảo ứng dụng vừa vặn trong container */
+            background: #ffffff; /* Màu nền của các ứng dụng */
+            border: 1px solid #ddd; /* Đường viền của ứng dụng */
+            border-radius: 8px; /* Bo góc */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+            text-align: center;
+        }
+
+        .app h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .app p {
+            margin: 10px 0 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin: 0 4px; /* Khoảng cách giữa các biểu tượng nhỏ hơn */
+            font-size: 1rem; /* Kích thước biểu tượng nhỏ hơn */
+            color: #333;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #007bff; /* Thay đổi màu khi hover */
+        }
+
+        .social-links .icon {
+            font-size: 1.6rem; /* Kích thước biểu tượng cụ thể */
+        }
+    </style>
+    <!-- Link to Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="preloader">
+        <div class="spinner"></div> <!-- Biểu tượng tải -->
+    </div>
+
+    
+
+        <div class="social-links">
+            
+            <a href="https://www.instagram.com/" target="_blank" class="icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@skyer.sontungmtp?_t=8oWWFsa2B74&_r=1/" target="_blank" class="icon">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://zalo.me/" target="_blank" class="icon">
+                <i class="fab fa-weixin"></i> <!-- Zalo không có biểu tượng chính thức trên Font Awesome, sử dụng Weixin (WeChat) thay thế -->
+            </a>
+            <a href="https://github.com/" target="_blank" class="icon">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Remove preloader once the page has fully loaded
+        window.addEventListener('load', () => {
+            document.querySelector('.preloader').style.display = 'none';
+            document.querySelector('.app-container').style.opacity = 1;
+        });
+    </script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <style>
+        .audio-container {
+            border: 2px solid #000; /* Khung viền */
+            padding: 10px;
+            width: 300px; /* Độ rộng của khung */
+            text-align: center; /* Căn giữa nút */
+            margin: 20px auto;
+            background-color: #f9f9f9; /* Màu nền */
+            border-radius: 8px; /* Bo góc khung viền */
+        }
+
+        #playButton {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: #4CAF50; /* Màu nền nút */
+            color: #FFFFFF; /* Màu chữ */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #playButton:hover {
+            background-color: #45a049; /* Màu nền nút khi hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-container">
+        <audio id="audioPlayer" controls>
+            <source src="46.mp3" type="audio/mp3">
+            Trình duyệt của bạn không hỗ trợ thẻ audio.
+        </audio>
+        <button id="Enjoy some music"></button>
+    </div>
+
+    <script>
+        document.getElementById("playButton").addEventListener("click", function() {
+            var audio = document.getElementById("audioPlayer");                
+            }
+      });
+    </script> 
+</body>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        
+    </style>
+</head>
+<body>
+
+    <!-- Màn hình intro -->
+    <div id="intro">
+        <div class="circle"></div>
+    </div>
+
+    <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e9eff1; /* Màu nền trang */
+            overflow: hidden; /* Ẩn thanh cuộn để khung viền không bị cắt */
+            position: relative;
+            height: 100vh; /* Đảm bảo chiều cao bằng toàn bộ cửa sổ */
+        }
+
+        .animated-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 5px solid;
+            border-radius: 10px;
+            box-sizing: border-box;
+            pointer-events: none; /* Để không cản trở tương tác với nội dung bên trong */
+            animation: borderAnimation 3s linear infinite; /* Tăng tốc độ chuyển động */
+            border-color: transparent;
+        }
+
+        @keyframes borderAnimation {
+            0% {
+                border-color: red;
+            }
+            14% {
+                border-color: orange;
+            }
+            28% {
+                border-color: yellow;
+            }
+            42% {
+                border-color: green;
+            }
+            57% {
+                border-color: blue;
+            }
+            71% {
+                border-color: indigo;
+            }
+            85% {
+                border-color: violet;
+            }
+            100% {
+                border-color: red;
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1; /* Đặt nội dung trên khung viền */
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-border"></div>
+
+
+</body>
+</html>
+
+    <script>
+        // Hiển thị nội dung chính sau khi intro đã hoàn thành
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('intro').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                document.body.style.overflow = 'auto'; // Cho phép cuộn lại
+            }, 3000); // Thay đổi thời gian chờ để phù hợp với thời gian chạy của animation
+        };
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu with Dropdown</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu.active div:nth-child(1) {
+            transform: rotate(45deg);
+            transform-origin: 5% 5%;
+        }
+
+        .menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu.active div:nth-child(3) {
+            transform: rotate(-45deg);
+            transform-origin: 5% 95%;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown a:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu" id="menu">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="dropdown" id="dropdown">
+        <a href="" target="_blank">Load Trang</a>
+        <a href=" https://www.facebook.com/profile.php?id=100090348911069" target="_blank">Facebook</a>
+        
+    </div>
+
+    <script>
+        const menu = document.getElementById('menu');
+        const dropdown = document.getElementById('dropdown');
+
+        menu.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Đóng menu khi nhấp ra ngoài
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !dropdown.contains(event.target)) {
+                menu.classList.remove('active');
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng Dụng Của Tôi</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #a2c2e8, #003d6b); /* Gradient từ xanh dương nhạt đến xanh dương đậm */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .top-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 5px solid #333;
+            background-color: #fff;
+            z-index: 10000;
+        }
+
+        .container {
+            border: 5px solid #333;
+            border-radius: 10px;
+            max-width: 1000px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Nền trắng bán trong suốt */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 60px;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .app-card {
+            border: 3px solid #003d6b; /* Khung viền nổi bật */
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-card h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #003d6b;
+        }
+
+        .app-card p {
+            font-size: 1em;
+            color: #333;
+        }
+    </style>
+</head>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Links</title>
+   
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color:#4A90E2; /* Màu nền xanh dương */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between; /* Tạo khoảng cách đều nhau giữa các phần tử */
+            align-items: center;
+            width: 90%; /* Chiều rộng của container, điều chỉnh để phù hợp với màn hình */
+            max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+        }
+
+        .card {
+            background-color: #fff;
+            border: 2px solid #003366;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            flex: 1; /* Để các phần tử có cùng kích thước và tự động giãn */
+            margin: 0 10px; /* Khoảng cách giữa các thẻ */
+            max-width: 150px; /* Giới hạn kích thước tối đa của các thẻ */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .link {
+            text-decoration: none;
+            color: #003366;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Audio Player</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #4A90E2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .audio-player {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 300px;
+        }
+
+        .play-btn {
+            width: 30px;
+            height: 30px;
+            background: url('play-icon.png') no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .play-btn.playing {
+            background: url('pause-icon.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 5px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background-color: #4A90E2;
+            border-radius: 5px;
+            width: 0;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #333;
+        }
+    </style>
+</head>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiệu ứng Tuyết Rơi Theo Gió</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #000; /* Màu nền tối để tuyết nổi bật hơn */
+            font-family: Arial, sans-serif; /* Font cho ký tự bông tuyết */
+        }
+
+        #snow {
+            position: fixed;
+            top: 0;
+            left: 5;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            font-size: 24px; /* Kích thước bông tuyết */
+            color: #fff; /* Màu bông tuyết */
+            opacity: 0.8;
+            pointer-events: none;
+            white-space: nowrap;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(0);
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) translateX(calc(200px * var(--windX)));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="snow"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const snowContainer = document.getElementById('snow');
+            const numFlakes = 100;
+
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄'; // Ký tự bông tuyết
+                const size = Math.random() * 8+ 5; // Kích thước từ 12px đến 36px
+                snowflake.style.fontSize = `${size}px`;
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.top = `-${size}px`;
+                snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+
+                // Randomize fall duration and wind direction
+                const fallDuration = Math.random() * 6000 + 6000; // Từ 20s đến 40s
+                const windDirection = Math.random() * 2 - 1; // Giá trị từ -1 đến 1 cho chuyển động ngang
+
+                snowflake.style.setProperty('--windX', windDirection);
+                snowflake.style.animationDuration = `${fallDuration}ms`; // Điều chỉnh tốc độ rơi
+                snowflake.style.animationTimingFunction = `linear`;
+
+                // Append snowflake to container
+                snowContainer.appendChild(snowflake);
+            }
+            for (let i = 0; i < numFlakes; i++) {
+                createSnowflake();
+            }
+        });
+    </script>
+</body>
+</html>
+<script>
+        function handleScroll() {
+            const elements = document.querySelectorAll('.content');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < windowHeight - 50) { // Kiểm tra phần tử có trong khung nhìn không
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', handleScroll);
+    </script>
+
+</body>
+</html>
